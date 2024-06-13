@@ -47,7 +47,7 @@
 		<div class="container-fluid footer">
 			<div class="container">
 
-				@Model.Value("footer")
+				@Model.Value("footer", fallback: Fallback.ToAncestors)
 
 			</div>
 		</div>
