@@ -4,6 +4,7 @@
 	Layout = null;
 }
 
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>Welcome - Test Site</title>
@@ -17,26 +18,23 @@
 	<body>
 
 		<!-- Navigation -->
+
+@{
+	var selection = Umbraco.ContentAtRoot().FirstOrDefault()
+    .Children()
+    .Where(x => x.IsVisible());
+}
 		<div class="container">
 			<nav class="navbar navbar-expand navbar-light">
-				<a class="navbar-brand font-weight-bold" href="index.html">Test Title</a>
+				<a class="navbar-brand font-weight-bold" href="/">Test Title</a>
 				<!-- Links -->
 				<ul class="navbar-nav">
-					<li class="nav-item">
-					    <a class="nav-link" href="Contentpage-Simple.html">Simple Content Page</a>
-					</li>
-					<li class="nav-item">
-					    <a class="nav-link" href="Contentpage-Advanced.html">Advanced Content Page</a>
-                    </li>
-                    <li class="nav-item">
-					    <a class="nav-link" href="Blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-					    <a class="nav-link" href="Contentpage2.html">The Team</a>
-					</li>
-					<li class="nav-item">
-					    <a class="nav-link" href="Contactpage.html">Contact</a>
-					</li>
+					@foreach (var item in selection)
+					{
+						<li class="nav-item">
+							<a href="@item.Url()" class="nav-link">@item.Name()</a>
+						</li>
+					}
 				</ul>
 			</nav>
 		</div>
